@@ -1,23 +1,18 @@
-import { list } from "../list";
-
-export default function Checkbox() {
-  console.log(list);
+// Create a Checkbox component that takes in checked, onChange and label as props.
+export default function Checkbox({ checked, onChange, label }) {
+  const handleChange = (event) => {
+    console.log(event.target.checked);
+    // propagage checked value upwards
+    onChange && onChange(event.target.checked);
+  };
   return (
     <div style={{ padding: "1rem" }}>
-      <h1>Checkboxes</h1>
-      <form>
-        {list.map((item) => (
-          <div key={item.id} style={{ padding: "1rem" }}>
-            <input
-              type="checkbox"
-              id={item.name}
-              name={item.name}
-              value={item.name}
-            />
-            <label htmlFor={item.name}>{item.name}</label>
-          </div>
-        ))}
-      </form>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => handleChange(e)}
+      />
+      <label htmlFor={label}>{label}</label>
     </div>
   );
 }
